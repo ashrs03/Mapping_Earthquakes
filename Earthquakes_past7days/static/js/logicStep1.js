@@ -24,40 +24,18 @@ let baseMaps = {
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-  center: [43.7, -79.3],
-  zoom: 11,
-  layers: [satelliteStreets]
+  center: [39.5, -98.5],
+  zoom: 3,
+  layers: [streets]
 })
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
   // Then we add our 'graymap' tile layer to the map.
-  satelliteStreets.addTo(map);
+  //satelliteStreets.addTo(map);
 
-  // Accessing the Toronto neighborhoods GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/ashrs03/Mapping_Earthquakes/main/torontoNeighborhoods.json";
-  // Accessing the airport GeoJSON URL
-//let airportData = "https://raw.githubusercontent.com/ashrs03/Mapping_Earthquakes/main/majorAirports.json";
-
-// Accessing the Toronto airline routes GeoJSON URL.
-//let torontoData = "https://raw.githubusercontent.com/ashrs03/Mapping_Earthquakes/main/torontoRoutes.json";
-
-// Create a style for the lines.
-let myStyle = {
-  color: "#000080",
-  fillColor: "yellow",
-  weight: 1
-}
-
-// Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
-    console.log(data);
+// Retrieve the earthquake GeoJSON data.
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data,{
-    style: myStyle,
-    onEachFeature: function(feature, layer){
-      layer.bindPopup("<h3> Airline:" + feature.properties.airline+"<h3><hr><h3> Destination:"+ feature.properties.dst+"</h3>");
-    }
-  })
-  .addTo(map);
+  L.geoJSON(data).addTo(map);
 });
