@@ -141,13 +141,15 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
       return "#ea2c2c";
     }
     if (magnitude >= 5) {
-      return "#ea822c";
+      return "#ea2c2c";
     }
     if (magnitude < 5) {
       return "#ea822c";
     }
-  }
   
+  }
+    
+
   // 6. Use the function that determines the radius of the earthquake marker based on its magnitude.
   function getRadius(magnitude) {
     if (magnitude === 0) {
@@ -191,7 +193,7 @@ legend.onAdd = function() {
     "#eecc00",
     "#ee9c00",
     "#ea822c",
-    "#ea2c2c"
+    "#ea2c2c",
   ];
 
 // Looping through our intervals to generate a label with a colored square for each interval.
@@ -209,7 +211,7 @@ legend.onAdd = function() {
 
 
   // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
-  d3.json("https://raw.githubusercontent.com/ashrs/Mapping_Earthquakes/main/PB2002_boundaries.json").then(function(data) {
+  d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
     function styleInfo(feature) {
         return {
           opacity: 1,
